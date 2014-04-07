@@ -23,7 +23,7 @@ public class MyServiceTest {
     @Resource MyService myService;
 
     @Test
-    public void testGetHelloMock1(){
+    public void testGetHelloWithoutMock(){
         // use the default implementation FrenchHello
         String result = myService.getHello();
         Assert.assertEquals("Bonjour",result);
