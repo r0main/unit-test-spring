@@ -1,4 +1,4 @@
 unit-test-spring
 ================
 
-Projet d'exemple pour montrer la mise en place de tests unitaires avec Spring et Mockito.
+Sample project to show how to unit test Spring with Mockito as mock framework.
