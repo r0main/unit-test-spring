@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 @ContextConfiguration(classes = {MyServiceInjectingMocksTest.MyServiceTestConfig.class, MyAppConfig.class})
 public class MyServiceInjectingMocksTest {
 
-    @Resource HelloService mockFrenchHello;
+    @Resource HelloService mockHelloService;
 
     @Resource MyService myService;
 
@@ -26,12 +26,12 @@ public class MyServiceInjectingMocksTest {
     public void afterTest(){
         //reset mock info because spring keep the mock instance "in cache".
         // If you delete this test "verifyGetHelloAskTheHelloService" will fail.
-        reset(mockFrenchHello);
+        reset(mockHelloService);
     }
 
     @Test
     public void testGetHelloMock1(){
-        when(mockFrenchHello.getHello()).thenReturn("Hi I'm a mock");
+        when(mockHelloService.getHello()).thenReturn("Hi I'm a mock");
         String result = myService.getHello();
         assertEquals("Hi I'm a mock", result);
     }
@@ -39,8 +39,8 @@ public class MyServiceInjectingMocksTest {
     @Test
     public void verifyGetHelloAskTheHelloService(){
         String result = myService.getHello();
-        verify(mockFrenchHello).getHello();
-        verifyNoMoreInteractions(mockFrenchHello);
+        verify(mockHelloService).getHello();
+        verifyNoMoreInteractions(mockHelloService);
     }
 
     static class MyServiceTestConfig{
@@ -49,8 +49,8 @@ public class MyServiceInjectingMocksTest {
          */
         @Bean
         @Primary
-        public HelloService getMySubService(){
-            return mock(FrenchHello.class);
+        public HelloService getHelloService(){
+            return mock(HelloService.class);
         }
     }
 }
